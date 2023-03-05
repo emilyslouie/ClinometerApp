@@ -24,41 +24,12 @@ struct ContentView: View {
             }, label: {
                 Text("Stop collecting angle")
             })
-            
-            Button(action: {
-                model.startCoreLocation()
-            }, label: {
-                Text("Start collecting location")
-            })
-            
-            Button(action: {
-                model.stopCoreLocation()
-            }, label: {
-                Text("Stop collecting location")
-            })
-            
-            Text("Distance is: " + String(model.distance))
-            Text("Test val is: " + String(model.testval))
-            
-            Button(action: {
-                model.authorizeHealthKit()
-            }, label: {
-                Text("Authorize health kit")
-            })
-            
-            Button(action: {
-                model.gettingStepCount() { myStepCount in
-                    model.stepCount = myStepCount
-                }
-            }, label: {
-                Text("Get distance for last min")
-            })
-            
-            Text("Step count is: \(String(model.stepCount))")
         }
         .padding()
         
         VStack() {
+            // This app uses your device motion to determine distance walked away from the base of the tree.
+            
             Button(action: {
                 model.startPedometer()
             }, label: {
@@ -75,6 +46,7 @@ struct ContentView: View {
 
             Text("Error: \(model.errorMessage)")
         }
+        .padding()
     }
 }
 

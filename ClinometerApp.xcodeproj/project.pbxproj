@@ -277,9 +277,6 @@
 				DEVELOPMENT_TEAM = 427XC27JX2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need to get your step count!";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need to get your step count!";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location to determine the distance between you and the base of the tree you are measuring!";
 				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses your device motion to determine distance walked away from the base of the tree.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -312,9 +309,6 @@
 				DEVELOPMENT_TEAM = 427XC27JX2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need to get your step count!";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need to get your step count!";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location to determine the distance between you and the base of the tree you are measuring!";
 				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses your device motion to determine distance walked away from the base of the tree.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
