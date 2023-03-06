@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CE3B21529B55DF70045CBD6 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3B21429B55DF70045CBD6 /* AuthView.swift */; };
 		1CFCD7E029B3DBFF00737768 /* ClinometerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFCD7DF29B3DBFF00737768 /* ClinometerApp.swift */; };
 		1CFCD7E229B3DBFF00737768 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFCD7E129B3DBFF00737768 /* ContentView.swift */; };
 		1CFCD7E429B3DC0100737768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CFCD7E329B3DC0100737768 /* Assets.xcassets */; };
 		1CFCD7E729B3DC0100737768 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CFCD7E629B3DC0100737768 /* Preview Assets.xcassets */; };
-		1CFCD7EE29B3DEBE00737768 /* VModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFCD7ED29B3DEBE00737768 /* VModel.swift */; };
+		1CFCD7EE29B3DEBE00737768 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFCD7ED29B3DEBE00737768 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1CE3B21429B55DF70045CBD6 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		1CFCD7DC29B3DBFF00737768 /* ClinometerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinometerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CFCD7DF29B3DBFF00737768 /* ClinometerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinometerApp.swift; sourceTree = "<group>"; };
 		1CFCD7E129B3DBFF00737768 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1CFCD7E329B3DC0100737768 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CFCD7E629B3DC0100737768 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1CFCD7ED29B3DEBE00737768 /* VModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModel.swift; sourceTree = "<group>"; };
+		1CFCD7ED29B3DEBE00737768 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1CFCD80E29B40D8900737768 /* ClinometerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClinometerApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,9 +59,10 @@
 				1CFCD80E29B40D8900737768 /* ClinometerApp.entitlements */,
 				1CFCD7DF29B3DBFF00737768 /* ClinometerApp.swift */,
 				1CFCD7E129B3DBFF00737768 /* ContentView.swift */,
+				1CE3B21429B55DF70045CBD6 /* AuthView.swift */,
+				1CFCD7ED29B3DEBE00737768 /* ViewModel.swift */,
 				1CFCD7E329B3DC0100737768 /* Assets.xcassets */,
 				1CFCD7E529B3DC0100737768 /* Preview Content */,
-				1CFCD7ED29B3DEBE00737768 /* VModel.swift */,
 			);
 			path = ClinometerApp;
 			sourceTree = "<group>";
@@ -143,7 +146,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CFCD7E229B3DBFF00737768 /* ContentView.swift in Sources */,
-				1CFCD7EE29B3DEBE00737768 /* VModel.swift in Sources */,
+				1CFCD7EE29B3DEBE00737768 /* ViewModel.swift in Sources */,
+				1CE3B21529B55DF70045CBD6 /* AuthView.swift in Sources */,
 				1CFCD7E029B3DBFF00737768 /* ClinometerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  Vswift
+//  ViewModel.swift
 //  ClinometerApp
 //
 //  Created by Emily Louie on 2023-03-04.
@@ -11,14 +11,20 @@ import CoreLocation
 import HealthKit
 
 class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
-    let motionManager = CMMotionManager()
     let pedometer = CMPedometer()
+    let motionManager = CMMotionManager()
     
     @Published var stepCount: Double = 0
     @Published var distanceWalked: Double = 0
+    @Published var pitch: Double = 0
+    
     @Published var errorMessage = "No error"
     
     // MARK: CoreMotion Pedometer -
+    
+    func isPedometerAuthorized() -> Bool {
+        return CMPedometer.authorizationStatus() == .authorized
+    }
     
     func startPedometer() {
         if CMPedometer.isDistanceAvailable() {
@@ -29,7 +35,11 @@ class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
                     self.distanceWalked = pedometerDistance.doubleValue
                     self.stepCount = data.numberOfSteps.doubleValue
                 } else {
-                    self.errorMessage = "error with pedometer data and distance"
+                    DispatchQueue.main.async {
+                        self.errorMessage = "error with pedometer data and distance"
+                    }
+                    
+                    
                 }
                 
             })
@@ -46,7 +56,7 @@ class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     // MARK: Device Motion -
     
-    func startDeviceMotion() {
+    func startAngleMeasurement() {
         if motionManager.isDeviceMotionAvailable {
             motionManager.startDeviceMotionUpdates(
                 to: OperationQueue.current!, withHandler: {
@@ -61,7 +71,7 @@ class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
     
-    func stopDeviceMotion() {
+    func stopAngleMeasurement() {
         motionManager.stopDeviceMotionUpdates()
     }
     

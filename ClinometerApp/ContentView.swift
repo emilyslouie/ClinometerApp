@@ -8,45 +8,96 @@
 import SwiftUI
 import CoreMotion
 
+enum Step {
+    case landingPage
+    case startAtTree
+    case measureDistance
+    case measureAngle
+    case inputHeight
+    case results
+}
+
 struct ContentView: View {
-    @StateObject var model: ClinometerModel
+    @ObservedObject var model: ClinometerModel
+    @State private var showAuthView = false
+    @State private var step: Step = .landingPage
+    
+    func text() -> String {
+        switch step {
+        case .landingPage:
+            return "Measure a tree!"
+        case .startAtTree:
+            return "Stand at the base of the tree you want to measure. \n When you are ready, press the button below!"
+        case .measureDistance:
+            return "Walk in a straight line away from the tree until you can see the top of the tree. \n When you are done, press the button below!"
+        case .measureAngle:
+            return "Put your eye to the eyepiece. Tilt your phone as you tilt your neck to see the top of the tree. \n Press the button when you see it!"
+        case .inputHeight:
+            return "Input your height into the field below:"
+        case .results:
+            return "Your tree is ___!"
+        }
+    }
+    
+    func buttonTitle() -> String {
+        switch step {
+        case .landingPage:
+            return "Start"
+        case .startAtTree:
+            return "Ready!"
+        case .measureDistance:
+            return "Done!"
+        case .measureAngle:
+            return "I see it!"
+        case .inputHeight:
+            return "Done!"
+        case .results:
+            return "Measure another tree!"
+        }
+    }
+    
+    func buttonAction() {
+        switch step {
+        case .landingPage:
+            step = .startAtTree
+        case .startAtTree:
+            model.startPedometer()
+            
+            if model.isPedometerAuthorized() {
+                step = .measureAngle
+            } else {
+                showAuthView = true
+            }
+        case .measureAngle:
+            model.stopPedometer()
+            model.startAngleMeasurement()
+            step = .measureDistance
+        case .measureDistance:
+            model.stopAngleMeasurement()
+            step = .inputHeight
+        case .inputHeight:
+            // input validate height
+            step = .results
+        case .results:
+            step = .startAtTree
+        }
+    }
     
     var body: some View {
-        VStack {
-            Button(action: {
-                model.startDeviceMotion()
-            }, label: {
-                Text("Start collecting angle")
-            })
-            
-            Button(action: {
-                model.stopDeviceMotion()
-            }, label: {
-                Text("Stop collecting angle")
-            })
-        }
-        .padding()
         
-        VStack() {
-            // This app uses your device motion to determine distance walked away from the base of the tree.
+        VStack(alignment: .center) {
+            Text(text())
             
             Button(action: {
-                model.startPedometer()
+                buttonAction()
             }, label: {
-                Text("Start pedometer")
+                Text(buttonTitle())
             })
-
-            Button(action: {
-                model.stopPedometer()
-            }, label: {
-                Text("Stop pedometer")
-            })
-            
-            Text("Distance from pedometer: \(String(model.distanceWalked))")
-
-            Text("Error: \(model.errorMessage)")
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .fullScreenCover(isPresented: $showAuthView) {
+            AuthView()
+        }
     }
 }
 
