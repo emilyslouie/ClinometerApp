@@ -11,19 +11,39 @@ struct AuthView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        Text("Uh oh! Please allow us to use Motion Services so we can determine the distance you walk away from the tree!")
-            .font(.title)
-            .padding(.horizontal, 16)
-        
-        Button(action: {
-            Task {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    await UIApplication.shared.open(url)
+        VStack(alignment: .center) {
+            Spacer()
+            
+            Text("Uh oh!")
+                .font(.title)
+                .bold()
+                .padding(.bottom, 16)
+            
+            Text("Please allow us to use Motion Services so we can determine the distance that you walk away from the tree!")
+                .font(.title)
+                .padding(.horizontal, 16)
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+            
+            Button(action: {
+                Task {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        await UIApplication.shared.open(url)
+                    }
                 }
-            }
-        }, label: {
-            Text("Take me to Settings!")
-        })
+            }, label: {
+                Text("Take me to Settings!")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 24)
+            })
+            .padding(.bottom, 32)
+            .buttonStyle(.borderedProminent)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 16)
+        
+        
     }
 }
 

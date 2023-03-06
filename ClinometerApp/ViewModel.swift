@@ -21,11 +21,30 @@ class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var stepCount: Double = 0
     @Published var distanceWalked: Double = 0
-    @Published var pitch: Double = 0
-    @Published var heightDouble: Double = 0
+    @Published var finalPitch: Double = 0
+    @Published var heightInMetres: Double = 0
     @Published var heightUnits: heightUnit = .cm
+    @Published var treeHeightInMetres: Double = 0
     
     @Published var errorMessage = "No error"
+    
+    func calculateTreeHeight() {
+        let heightOfTreeAboveEye = tan(finalPitch) * distanceWalked
+        print("Final pitch is \(finalPitch) and tan is \(tan(finalPitch)), height of tree is \(heightOfTreeAboveEye)")
+        
+        // 2.8 inch on average
+        let foreheadHeight = 0.0711
+        let heightOfEyeAboveGround = heightInMetres - foreheadHeight
+        treeHeightInMetres = heightOfTreeAboveEye + heightOfEyeAboveGround
+        
+        print("heightOfEyeAboveGround \(heightOfEyeAboveGround), tree height before rounding is \(treeHeightInMetres)")
+        
+        // reset everything
+        
+        stepCount = 0
+        distanceWalked = 0
+        finalPitch = 0
+    }
     
     // MARK: CoreMotion Pedometer -
     
@@ -88,16 +107,22 @@ class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
         
         let attitude = deviceMotion.attitude
-        let pitch = degrees(radians: attitude.pitch)
-        print(Double(round(1000 * pitch)/1000))
+        let pitch = attitude.pitch
+        let convertedPitch = (1/2) * Double.pi - pitch
+        finalPitch = convertedPitch
+        
+        print("pitch: \(pitch), converted pitch: \(convertedPitch)")
     }
     
     // MARK: Helpers
     
     func degrees(radians:Double) -> Double {
-        return 180 / Double.pi * radians
+        return (180 / Double.pi) * radians
     }
 }
 
-
-
+extension Double {
+    func truncate(places : Int)-> Double {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    }
+}
