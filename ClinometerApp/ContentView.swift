@@ -21,6 +21,10 @@ struct ContentView: View {
     @ObservedObject var model: ClinometerModel
     @State private var showAuthView = false
     @State private var step: Step = .landingPage
+    @State private var metresFeetString: String = ""
+    @State private var inchesString: String = ""
+    @State var showHeightPrompt = false
+    
     
     func text() -> String {
         switch step {
@@ -64,20 +68,38 @@ struct ContentView: View {
             model.startPedometer()
             
             if model.isPedometerAuthorized() {
-                step = .measureAngle
+                step = .measureDistance
             } else {
                 showAuthView = true
             }
-        case .measureAngle:
+        case .measureDistance:
             model.stopPedometer()
             model.startAngleMeasurement()
-            step = .measureDistance
-        case .measureDistance:
+            step = .measureAngle
+        case .measureAngle:
             model.stopAngleMeasurement()
             step = .inputHeight
         case .inputHeight:
-            // input validate height
-            step = .results
+            
+            switch model.heightUnits {
+            case .cm:
+                if let height = Double(metresFeetString) {
+                    model.heightDouble = height
+                    showHeightPrompt = false
+                    step = .results
+                } else {
+                    showHeightPrompt = true
+                }
+            case .inch:
+                if let feet = Double(metresFeetString),
+                   let inches = Double(inchesString) {
+                    model.heightDouble = feet + inches * 1/12
+                    showHeightPrompt = false
+                    step = .results
+                } else {
+                    showHeightPrompt = true
+                }
+            }
         case .results:
             step = .startAtTree
         }
@@ -87,6 +109,34 @@ struct ContentView: View {
         
         VStack(alignment: .center) {
             Text(text())
+            
+            if step == .inputHeight {
+                TextField(model.heightUnits == .cm ? "Meters" : "Feet", text: $metresFeetString)
+                    .padding()
+                if model.heightUnits == .inch {
+                    TextField("Inches", text: $inchesString)
+                }
+                
+                HStack(alignment: .center) {
+                    Button(action: {
+                        model.heightUnits = .cm
+                    }, label: {
+                        Text("Centimeters (cm)")
+                    })
+                    Button(action: {
+                        model.heightUnits = .inch
+                    }, label: {
+                        Text("Inches (inch)")
+                    })
+                }
+                
+                if showHeightPrompt {
+                    Text("Please input a valid number for height!")
+                        .foregroundColor(.red)
+                        .bold()
+                }
+                    
+            }
             
             Button(action: {
                 buttonAction()

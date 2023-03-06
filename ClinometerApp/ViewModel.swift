@@ -10,6 +10,11 @@ import CoreMotion
 import CoreLocation
 import HealthKit
 
+enum heightUnit {
+    case cm
+    case inch
+}
+
 class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     let pedometer = CMPedometer()
     let motionManager = CMMotionManager()
@@ -17,6 +22,8 @@ class ClinometerModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     @Published var stepCount: Double = 0
     @Published var distanceWalked: Double = 0
     @Published var pitch: Double = 0
+    @Published var heightDouble: Double = 0
+    @Published var heightUnits: heightUnit = .cm
     
     @Published var errorMessage = "No error"
     
