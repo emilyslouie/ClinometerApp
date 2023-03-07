@@ -6,11 +6,12 @@
 //
 
 enum Constants {
-    // Average forehead height for women is 2.4 inch, for men is 2.8 inch, so average is 2.6 inch or 6.604 cm
-    static let averageForeheadHeight = 6.604
+    // Calculated by subtracting median eye height from median stature for men and women, then averaging the two differences together
+    // Source: https://dacowits.defense.gov/LinkClick.aspx?fileticket=EbsKcm6A10U%3D&portalid=48
+    static let averageDifferenceBetweenHeightAndEyeLevel = 11.2
 
     static let footToMetreConversion = 0.3048
     static let metreToFootConversion = 3.28084
-    
+
     static let inchToFootConversion = 1/12
 }

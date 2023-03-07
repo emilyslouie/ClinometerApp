@@ -57,7 +57,7 @@ struct ContentView: View {
             let treeHeightInFeetRounded = (model.treeHeightInMetres * Constants.metreToFootConversion).truncate(places: 4)
             let treeHeightInMetresRounded = model.treeHeightInMetres.truncate(places: 4)
             
-            return "Your tree is \(treeHeightInMetresRounded) metres or \(treeHeightInFeetRounded) feet tall!"
+            return "Your tree is \(treeHeightInMetresRounded) metres or \(treeHeightInFeetRounded) feet tall!\n\nYou walked \(model.distanceWalked) metres and measured an angle of \(model.finalPitch) radians above eye-level!\nWe estimated your eye-level based on your height, by subtracting the median distance from top of head to eyes (Gordon, Claire C. et. al (2014))."
         }
     }
     
@@ -83,6 +83,7 @@ struct ContentView: View {
         case .landingPage:
             step = .startAtTree
         case .startAtTree:
+            model.resetMeasurements()
             model.startPedometer()
             if model.isPedometerAuthorized() {
                 step = .measureDistance
@@ -119,7 +120,6 @@ struct ContentView: View {
             }
         case .results:
             step = .startAtTree
-            model.resetMeasurements()
         }
     }
     
@@ -134,9 +134,9 @@ struct ContentView: View {
             if step == .measureDistance {
                 Text("Step count: \(model.stepCount)\nDistance walked: \(model.distanceWalked)")
                     .font(.title2)
-            } else if step == .measureAngle {
-                Text("Angle in radians: \(model.finalPitch)")
-                    .font(.title2)
+            // } else if step == .measureAngle {
+            //     Text("Angle in radians: \(model.finalPitch)")
+            //         .font(.title2)
             } else if step == .inputHeight {
                 HStack() {
                     TextField(model.heightUnits == .cm ? "Meters" : "Feet", text: $metresOrFeetString)
@@ -184,7 +184,7 @@ struct ContentView: View {
             }, label: {
                 Text(buttonTitle())
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 24)
+                    .padding(.vertical, step == .measureAngle ? 48 : 24)
             })
             .buttonStyle(.borderedProminent)
         }
