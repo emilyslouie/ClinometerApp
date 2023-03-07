@@ -25,8 +25,6 @@ class ClinometerModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var heightInMetres: Double = 0
     @Published var heightUnits: HeightUnit = .cm
     @Published var treeHeightInMetres: Double = 0
-
-    @Published var 
     
     func calculateTreeHeight() {
         let heightOfTreeAboveEye = tan(finalPitch) * distanceWalked

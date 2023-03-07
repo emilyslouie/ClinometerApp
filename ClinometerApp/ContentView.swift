@@ -9,15 +9,16 @@
 TODOs:
 Add instruction which slider to change in Settings, then to return to the app (done)
 
+Add instruction about walking a minimum amount (done)
+
 Add instruction about holding as close as possible to eye (done)
 Add instruction about starting looking straight ahead (done)
 Update description of eyepiece as it goes out of view of the eyepiece (done)
 
-Add instruction about walking a minimum amount (done)
 Make sure we clear steps in between measurements (done)
 
 Print out in feet on results page (done)
-Print out final values on results page
+Print out final values on results page (done)
 */
 
 import SwiftUI
@@ -39,7 +40,6 @@ struct ContentView: View {
     @State private var metresOrFeetString: String = ""
     @State private var inchesString: String = ""
     @State var showHeightPrompt = false
-    
     
     func text() -> String {
         switch step {
