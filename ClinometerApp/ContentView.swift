@@ -14,8 +14,9 @@ Add instruction about starting looking straight ahead (done)
 Update description of eyepiece as it goes out of view of the eyepiece (done)
 
 Add instruction about walking a minimum amount (done)
-Make sure we clear steps in between measurements
+Make sure we clear steps in between measurements (done)
 
+Print out in feet on results page (done)
 Print out final values on results page
 */
 
@@ -35,7 +36,7 @@ struct ContentView: View {
     @ObservedObject var model: ClinometerModel
     @State private var showAuthView = false
     @State private var step: Step = .landingPage // can change this to different pages for testing
-    @State private var metresFeetString: String = ""
+    @State private var metresOrFeetString: String = ""
     @State private var inchesString: String = ""
     @State var showHeightPrompt = false
     
@@ -53,8 +54,10 @@ struct ContentView: View {
         case .inputHeight:
             return "Input your height into the field below:"
         case .results:
-            let roundedHeight = model.treeHeightInMetres.truncate(places: 3)
-            return "Your tree is \(roundedHeight) metres tall!"
+            let treeHeightInFeetRounded = (model.treeHeightInMetres * Constants.metreToFootConversion).truncate(places: 4)
+            let treeHeightInMetresRounded = model.treeHeightInMetres.truncate(places: 4)
+            
+            return "Your tree is \(treeHeightInMetresRounded) metres or \(treeHeightInFeetRounded) feet tall!"
         }
     }
     
@@ -96,7 +99,7 @@ struct ContentView: View {
         case .inputHeight:
             switch model.heightUnits {
             case .cm:
-                if let height = Double(metresFeetString) {
+                if let height = Double(metresOrFeetString) {
                     model.heightInMetres = height
                     showHeightPrompt = false
                     step = .results
@@ -104,16 +107,16 @@ struct ContentView: View {
                     showHeightPrompt = true
                 }
             case .inch:
-                if let feet = Double(metresFeetString),
+                if let feet = Double(metresOrFeetString),
                    let inches = Double(inchesString) {
-                    model.heightInMetres = (feet + inches * 1/12) * 0.305
+                    model.heightInMetres = (feet + inches * Constants.inchToFootConversion) * Constants.footToMetreConversion
                     showHeightPrompt = false
+                    model.calculateTreeHeight()
                     step = .results
                 } else {
                     showHeightPrompt = true
                 }
             }
-            model.calculateTreeHeight()
         case .results:
             step = .startAtTree
             model.resetMeasurements()
@@ -136,7 +139,7 @@ struct ContentView: View {
                     .font(.title2)
             } else if step == .inputHeight {
                 HStack() {
-                    TextField(model.heightUnits == .cm ? "Meters" : "Feet", text: $metresFeetString)
+                    TextField(model.heightUnits == .cm ? "Meters" : "Feet", text: $metresOrFeetString)
                         .padding()
                         .textFieldStyle(.roundedBorder)
                     if model.heightUnits == .inch {
