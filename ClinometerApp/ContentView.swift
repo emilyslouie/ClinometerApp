@@ -7,13 +7,13 @@
 
 /*
 TODOs:
-Add instruction which slider to change in Settings, then to return to the app
+Add instruction which slider to change in Settings, then to return to the app (done)
 
-Add instruction about holding as close as possible to eye
-Add instruction about starting looking straight ahead
-Update description of eyepiece as it goes out of view of the eyepiece (goes below the eye piece)
+Add instruction about holding as close as possible to eye (done)
+Add instruction about starting looking straight ahead (done)
+Update description of eyepiece as it goes out of view of the eyepiece (done)
 
-Add instruction about walking a minimum amount (10 steps, 5m)
+Add instruction about walking a minimum amount (done)
 Make sure we clear steps in between measurements
 
 Print out final values on results page
@@ -34,7 +34,7 @@ enum Step {
 struct ContentView: View {
     @ObservedObject var model: ClinometerModel
     @State private var showAuthView = false
-    @State private var step: Step = .landingPage // TODO: CHANGE THIS BACK
+    @State private var step: Step = .landingPage // can change this to different pages for testing
     @State private var metresFeetString: String = ""
     @State private var inchesString: String = ""
     @State var showHeightPrompt = false
@@ -47,9 +47,9 @@ struct ContentView: View {
         case .startAtTree:
             return "Stand at the base of the tree you want to measure.\n\nWhen you are ready, press the button below!"
         case .measureDistance:
-            return "Walk in a straight line away from the tree until you can see the top of the tree.\n\nWhen you are done, wait 10 seconds for the step count to update, then press the button below!"
+            return "Walk 10 steps in a straight line away from the tree. Ensure that when you turn around, you can see the top of the tree, otherwise, keep walking.\n\nWhen you are done walking, wait 10 seconds for the step count to update (don't worry if it isn't exact), then press the button below!"
         case .measureAngle:
-            return "Put your eye to the eyepiece. Tilt your phone as you tilt your neck to see the top of the tree.\n\nPress the button when you see it!"
+            return "Look straight in front of you, and bring the eyepiece to your eye so you can see through it.\n\nTilt your phone as you tilt your neck back until the top of the tree is at the bottom of the eyepiece, then press the button!"
         case .inputHeight:
             return "Input your height into the field below:"
         case .results:
@@ -61,7 +61,7 @@ struct ContentView: View {
     func buttonTitle() -> String {
         switch step {
         case .landingPage:
-            return "Start"
+            return "Start!"
         case .startAtTree:
             return "Ready!"
         case .measureDistance:
@@ -81,7 +81,6 @@ struct ContentView: View {
             step = .startAtTree
         case .startAtTree:
             model.startPedometer()
-            
             if model.isPedometerAuthorized() {
                 step = .measureDistance
             } else {
@@ -95,7 +94,6 @@ struct ContentView: View {
             model.stopAngleMeasurement()
             step = .inputHeight
         case .inputHeight:
-            
             switch model.heightUnits {
             case .cm:
                 if let height = Double(metresFeetString) {
@@ -118,12 +116,11 @@ struct ContentView: View {
             model.calculateTreeHeight()
         case .results:
             step = .startAtTree
-            model.treeHeightInMetres = 0
+            model.resetMeasurements()
         }
     }
     
     var body: some View {
-        
         VStack(alignment: .center) {
             Spacer()
             
@@ -131,16 +128,13 @@ struct ContentView: View {
                 .font(.title2)
                 .padding(.bottom, 48)
             
-            
             if step == .measureDistance {
                 Text("Step count: \(model.stepCount)\nDistance walked: \(model.distanceWalked)")
                     .font(.title2)
             } else if step == .measureAngle {
                 Text("Angle in radians: \(model.finalPitch)")
                     .font(.title2)
-                
             } else if step == .inputHeight {
-                
                 HStack() {
                     TextField(model.heightUnits == .cm ? "Meters" : "Feet", text: $metresFeetString)
                         .padding()
@@ -150,7 +144,6 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                     }
                 }
-                
                 
                 HStack(alignment: .center) {
                     Button(action: {
@@ -191,7 +184,6 @@ struct ContentView: View {
                     .padding(.vertical, 24)
             })
             .buttonStyle(.borderedProminent)
-            
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 16)
@@ -201,8 +193,6 @@ struct ContentView: View {
         }
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
