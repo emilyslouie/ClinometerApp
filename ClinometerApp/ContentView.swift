@@ -5,6 +5,20 @@
 //  Created by Emily Louie on 2023-03-04.
 //
 
+/*
+TODOs:
+Add instruction which slider to change in Settings, then to return to the app
+
+Add instruction about holding as close as possible to eye
+Add instruction about starting looking straight ahead
+Update description of eyepiece as it goes out of view of the eyepiece (goes below the eye piece)
+
+Add instruction about walking a minimum amount (10 steps, 5m)
+Make sure we clear steps in between measurements
+
+Print out final values on results page
+*/
+
 import SwiftUI
 import CoreMotion
 
@@ -182,7 +196,7 @@ struct ContentView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 16)
         .padding(.bottom, 32)
-        .fullScreenCover(isPresented: $showAuthView) {
+        .fullScreenCover(isPresented: $showAuthView, onDismiss: { step = .startAtTree }) {
             AuthView()
         }
     }

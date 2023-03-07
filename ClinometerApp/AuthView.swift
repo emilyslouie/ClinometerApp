@@ -19,7 +19,7 @@ struct AuthView: View {
                 .bold()
                 .padding(.bottom, 16)
             
-            Text("Please allow us to use Motion Services so we can determine the distance that you walk away from the tree!")
+            Text("Please allow us to use Motion & Fitness so we can determine the distance that you walk away from the tree!\n\nTap the button below, then toggle Motion & Fitness, then return to this app!")
                 .font(.title)
                 .padding(.horizontal, 16)
                 .multilineTextAlignment(.center)
