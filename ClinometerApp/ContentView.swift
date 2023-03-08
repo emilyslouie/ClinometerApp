@@ -210,7 +210,7 @@ struct ContentView: View {
             }
 
             if showProgressView {
-                ProgressView()
+                ProgressView("Determining distance walked...")
             }
         }
     }
