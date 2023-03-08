@@ -114,6 +114,7 @@ struct ContentView: View {
                 if let height = Double(metresOrFeetString) {
                     model.heightInMetres = height
                     showHeightPrompt = false
+                    model.calculateTreeHeight()
                     step = .results
                 } else {
                     showHeightPrompt = true
