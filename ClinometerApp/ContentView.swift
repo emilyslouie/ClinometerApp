@@ -213,7 +213,7 @@ struct ContentView: View {
                 ProgressView("Determining distance walked...")
                     .padding()
                     .foregroundColor(.black)
-                    .backgroundColor(.gray)
+                    .background(.gray)
             }
         }
     }
