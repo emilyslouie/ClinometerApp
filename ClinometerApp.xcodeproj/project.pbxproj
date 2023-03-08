@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C13FBE429B718EA000CF708 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13FBE329B718EA000CF708 /* Constants.swift */; };
+		1C13FBE629B71967000CF708 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13FBE529B71967000CF708 /* Extensions.swift */; };
 		1CE3B21529B55DF70045CBD6 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3B21429B55DF70045CBD6 /* AuthView.swift */; };
 		1CFCD7E029B3DBFF00737768 /* ClinometerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFCD7DF29B3DBFF00737768 /* ClinometerApp.swift */; };
 		1CFCD7E229B3DBFF00737768 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFCD7E129B3DBFF00737768 /* ContentView.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C13FBE329B718EA000CF708 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1C13FBE529B71967000CF708 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1CE3B21429B55DF70045CBD6 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		1CFCD7DC29B3DBFF00737768 /* ClinometerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinometerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CFCD7DF29B3DBFF00737768 /* ClinometerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinometerApp.swift; sourceTree = "<group>"; };
@@ -58,9 +62,11 @@
 			children = (
 				1CFCD80E29B40D8900737768 /* ClinometerApp.entitlements */,
 				1CFCD7DF29B3DBFF00737768 /* ClinometerApp.swift */,
+				1C13FBE329B718EA000CF708 /* Constants.swift */,
 				1CFCD7E129B3DBFF00737768 /* ContentView.swift */,
 				1CE3B21429B55DF70045CBD6 /* AuthView.swift */,
 				1CFCD7ED29B3DEBE00737768 /* ViewModel.swift */,
+				1C13FBE529B71967000CF708 /* Extensions.swift */,
 				1CFCD7E329B3DC0100737768 /* Assets.xcassets */,
 				1CFCD7E529B3DC0100737768 /* Preview Content */,
 			);
@@ -145,6 +151,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C13FBE429B718EA000CF708 /* Constants.swift in Sources */,
+				1C13FBE629B71967000CF708 /* Extensions.swift in Sources */,
 				1CFCD7E229B3DBFF00737768 /* ContentView.swift in Sources */,
 				1CFCD7EE29B3DEBE00737768 /* ViewModel.swift in Sources */,
 				1CE3B21529B55DF70045CBD6 /* AuthView.swift in Sources */,
