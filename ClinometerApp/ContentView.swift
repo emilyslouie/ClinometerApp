@@ -154,11 +154,11 @@ struct ContentView: View {
                     HStack() {
                         TextField(model.heightUnits == .cm ? "Meters" : "Feet", text: $metresOrFeetString)
                             .textFieldStyle(.roundedBorder)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                         if model.heightUnits == .inch {
                             TextField("Inches", text: $inchesString)
                                 .textFieldStyle(.roundedBorder)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.decimalPad)
                         }
                     }
                     
@@ -211,6 +211,9 @@ struct ContentView: View {
 
             if showProgressView {
                 ProgressView("Determining distance walked...")
+                    .padding()
+                    .foregroundColor(.black)
+                    .backgroundColor(.gray)
             }
         }
     }
